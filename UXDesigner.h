@@ -2,17 +2,21 @@
 #define UXDESIGNER_H
 
 #include <string>
+#include <vector> // Add this!
 #include "TeamMember.h"
 
-class UXDesigner : public TeamMember{
-    public:
-      UXDesigner(std::string id, std::string name, double rate, int exp, int projects,std::string DesignTool,bool Portfolio)
-        : TeamMember(id, name, rate, exp, projects),mainDesignTool(DesignTool),hasPortfolio(Portfolio) {}
+class UXDesigner : public TeamMember {
+private:
+    std::vector<std::string> tools; // Changed from std::string to a vector
+    bool hasPortfolio;
 
-        double calculateProjectSuitability(std::string projectType) override { return 0.0; }
-    private :
-       std:: string mainDesignTool;
-       bool hasPortfolio;
+public:
+    UXDesigner(std::string id, std::string name, double rate, int exp, int projects, 
+               std::vector<std::string> tls, bool portfolio)
+        : TeamMember(id, name, rate, exp, projects), tools(tls), hasPortfolio(portfolio) {}
+
+    std::vector<std::string> getTools() const { return tools; }
+    bool getHasPortfolio() const { return hasPortfolio; }
 };
 
 #endif
