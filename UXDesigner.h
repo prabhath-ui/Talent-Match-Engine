@@ -17,6 +17,8 @@ public:
 
     std::vector<std::string> getTools() const { return tools; }
     bool getHasPortfolio() const { return hasPortfolio; }
+     double calculateProjectSuitability(std::string projectType) override{ 
+        return 0.0;}
 };
 
 #endif

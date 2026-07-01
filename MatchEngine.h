@@ -5,10 +5,9 @@
 #include "TeamMember.h"
 
 class MatchEngine {
-  public : 
-    static double calculateMatchScore(TeamMember* member,std::string projectType){
-
-     }
+public: 
+    // Just a declaration blueprint ending with a semicolon!
+    static double calculateMatchScore(TeamMember* member, std::string projectType);
 };
 
 #endif

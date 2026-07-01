@@ -20,6 +20,9 @@ public:
 
     std::vector<std::string> getLanguages() const { return languages; }
     bool getIsFullStack() const { return isFullStack; }
+
+    double calculateProjectSuitability(std::string projectType) override{ 
+        return 0.0;}
 };
 
 #endif
