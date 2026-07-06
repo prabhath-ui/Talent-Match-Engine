@@ -1,24 +1,20 @@
-#ifndef UXDESIGNER_H
-#define UXDESIGNER_H
+#ifndef UX_DESIGNER_H
+#define UX_DESIGNER_H
 
-#include <string>
-#include <vector> // Add this!
 #include "TeamMember.h"
+#include <vector>
+#include <string>
 
 class UXDesigner : public TeamMember {
 private:
-    std::vector<std::string> tools; // Changed from std::string to a vector
-    bool hasPortfolio;
+    std::vector<std::string> tools;
 
 public:
-    UXDesigner(std::string id, std::string name, double rate, int exp, int projects, 
-               std::vector<std::string> tls, bool portfolio)
-        : TeamMember(id, name, rate, exp, projects), tools(tls), hasPortfolio(portfolio) {}
+    UXDesigner(std::string id, std::string name, double baseScore, 
+               int exp, int projects, std::vector<std::string> designerTools);
 
-    std::vector<std::string> getTools() const { return tools; }
-    bool getHasPortfolio() const { return hasPortfolio; }
-     double calculateProjectSuitability(std::string projectType) override{ 
-        return 0.0;}
+    // This is just a declaration. No logic, no body, just a semicolon!
+    double calculateProjectSuitability(std::string projectType) override;
 };
 
 #endif

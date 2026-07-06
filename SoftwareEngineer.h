@@ -1,28 +1,22 @@
 
-#include <vector>
+#ifndef SOFTWARE_ENGINEER_H
+#define SOFTWARE_ENGINEER_H
 
-#ifndef SOFTWAREENGINEER_H
-#define SOFTWAREENGINEER_H
-
-#include <string>
-#include <vector>
 #include "TeamMember.h"
+#include <vector>
+#include <string>
 
 class SoftwareEngineer : public TeamMember {
 private:
-    std::vector<std::string> languages; // Changed from std::string to a vector
+    std::vector<std::string> languages;
     bool isFullStack;
 
 public:
-    SoftwareEngineer(std::string id, std::string name, double rate, int exp, int projects, 
-                     std::vector<std::string> langs, bool fullStack)
-        : TeamMember(id, name, rate, exp, projects), languages(langs), isFullStack(fullStack) {}
+    SoftwareEngineer(std::string id, std::string name, double baseScore, 
+                     int exp, int projects, std::vector<std::string> langs, bool fullStack);
 
-    std::vector<std::string> getLanguages() const { return languages; }
-    bool getIsFullStack() const { return isFullStack; }
-
-    double calculateProjectSuitability(std::string projectType) override{ 
-        return 0.0;}
+    // This is just a declaration. No logic, no body, just a semicolon!
+    double calculateProjectSuitability(std::string projectType) override;
 };
 
 #endif
