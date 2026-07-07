@@ -4,6 +4,7 @@
 #include "TeamMember.h"
 #include <vector>
 #include <string>
+#include "ProjectCategory.h"
 
 class UXDesigner : public TeamMember {
 private:
@@ -14,7 +15,7 @@ public:
                int exp, int projects, std::vector<std::string> designerTools);
 
     // This is just a declaration. No logic, no body, just a semicolon!
-    double calculateProjectSuitability(std::string projectType) override;
+    double calculateProjectSuitability(ProjectCategory category) override;
 };
 
 #endif

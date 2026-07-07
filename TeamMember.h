@@ -3,7 +3,7 @@
 #define TEAM_MEMBER_H
 
 #include <string>
-
+#include "ProjectCategory.h"
 class TeamMember {
 protected:
     std::string id;
@@ -19,7 +19,7 @@ public:
     // Declarations only!
     int getYearsOfExperience() const;
     int getProjectsCompleted() const;
-    virtual double calculateProjectSuitability(std::string projectType) = 0;
+    virtual double calculateProjectSuitability(ProjectCategory category) = 0;
 };
 
 #endif

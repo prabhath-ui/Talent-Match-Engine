@@ -1,10 +1,10 @@
 #include "MatchEngine.h"
 
-double MatchEngine::calculateMatchScore(const std::unique_ptr<TeamMember>& member, std::string projectType) {
-    if (!member) return 0.0; // Fail-safe null check!
+double MatchEngine::calculateMatchScore(const std::unique_ptr<TeamMember>& member, const Project& project) {
+    if (!member) return 0.0;
 
-    // The -> operator works exactly the same with smart pointers!
-    double score = member->calculateProjectSuitability(projectType);
+    
+    double score = member->calculateProjectSuitability(project.getCategory());
 
     if (member->getYearsOfExperience() > 5) score += 15.0;
     else if (member->getProjectsCompleted() >= 8) score += 5.0;
