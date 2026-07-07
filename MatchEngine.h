@@ -1,13 +1,9 @@
-#ifndef MATCHENGINE_H
-#define MATCHENGINE_H
-
+#include <memory>
 #include <string>
 #include "TeamMember.h"
 
 class MatchEngine {
-public: 
-    // Just a declaration blueprint ending with a semicolon!
-    static double calculateMatchScore(TeamMember* member, std::string projectType);
+public:
+    // Update raw pointer to a const reference of a unique_ptr
+    static double calculateMatchScore(const std::unique_ptr<TeamMember>& member, std::string projectType);
 };
-
-#endif

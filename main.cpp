@@ -1,23 +1,34 @@
 #include <iostream>
 #include <vector>
-#include <string>
+#include <memory> // Required for std::unique_ptr and std::make_unique
+#include "MatchEngine.h"
 #include "SoftwareEngineer.h"
 #include "UXDesigner.h"
-#include "MatchEngine.h"
 
 using namespace std;
 
 int main() {
-   vector<string> engSkills = {"Go", "Docker"};
-    SoftwareEngineer charlie("SE-02", "Charlie Cloud", 90.0, 6, 12, engSkills, true);
-    // Calc: Base 70 + 10 (FullStack) + 15 (Go) = 95. MatchEngine: +15 (Exp > 5) -> Clamped to 100%
-    cout << "Charlie Score: " << MatchEngine::calculateMatchScore(&charlie, "Cloud") << "%" << endl;
+    // Create a heterogeneous registry container managing diverse roles polymorphically
+    vector<unique_ptr<TeamMember>> talentRegistry;
 
-    // 2. Test the UXDesigner
-    vector<string> designerTools = {"Sketch", "Photoshop"}; // Lacks Figma
-    UXDesigner dani("UX-01", "Dani Draft", 85.0, 2, 9, designerTools);
-    // Calc: Base 70 - 30 (No Figma for Web) = 40. MatchEngine: +5 (Projects >= 8) -> 45%
-    cout << "Dani Score: " << MatchEngine::calculateMatchScore(&dani, "Web") << "%" << endl;
+    // 1. Populate registry using modern heap allocation
+    talentRegistry.push_back(make_unique<SoftwareEngineer>(
+        "SE-02", "Charlie Cloud", 90.0, 6, 12, vector<string>{"Go", "Docker"}, true
+    ));
+
+    talentRegistry.push_back(make_unique<UXDesigner>(
+        "UX-01", "Dani Draft", 85.0, 2, 9, vector<string>{"Sketch", "Photoshop"}
+    ));
+
+    // 2. Process our engine scores cleanly by looping through the registry
+    cout << "=== Day 14 Talent Engine Registry Evaluation ===" << endl;
+    for (const auto& member : talentRegistry) {
+        // Evaluate every member against a "Cloud" project footprint
+        double score = MatchEngine::calculateMatchScore(member, "Cloud");
+        
+        // Zero memory overhead leaks because unique_ptr cleans itself up automatically!
+        cout << "Evaluated Profile Score: " << score << "%" << endl;
+    }
 
     return 0;
 }
