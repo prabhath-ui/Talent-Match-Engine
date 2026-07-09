@@ -20,6 +20,8 @@ public:
     int getYearsOfExperience() const;
     int getProjectsCompleted() const;
     virtual double calculateProjectSuitability(ProjectCategory category) = 0;
+
+    double calculateExperienceBonus() const;
 };
 
 #endif
