@@ -25,7 +25,9 @@ int TeamMember::getYearsOfExperience() const {
 int TeamMember::getProjectsCompleted() const { 
     return projectsCompleted; 
 }
-
+std::string TeamMember::getId() const {
+    return id;
+}
 double TeamMember::calculateExperienceBonus() const {
     double bonus = 0.0;
     if (yearsOfExperience > 5) {

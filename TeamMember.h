@@ -22,6 +22,7 @@ public:
     virtual double calculateProjectSuitability(ProjectCategory category) = 0;
 
     double calculateExperienceBonus() const;
+    std::string getId() const;
 };
 
 #endif

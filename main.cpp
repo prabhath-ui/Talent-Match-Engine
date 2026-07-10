@@ -7,12 +7,12 @@
 #include "SoftwareEngineer.h"
 #include "UXDesigner.h"
 #include "Project.h"
+#include <fstream>
 
 using namespace std;
 
 int main() {
     try {
-        // The try block watches this code for any thrown exceptions
         vector<unique_ptr<TeamMember>> talentRegistry;
 
         talentRegistry.push_back(make_unique<SoftwareEngineer>(
@@ -23,18 +23,33 @@ int main() {
 
         Project cloudDeployment("PRJ-99", ProjectCategory::Cloud, {"Go", "Kubernetes"});
 
+    
+        ofstream reportFile("match_report.txt");
+        if (!reportFile.is_open()) {
+            throw runtime_error("Failed to open or create match_report.txt");
+        }
+
+        
         for (const auto& member : talentRegistry) {
             double score = MatchEngine::calculateMatchScore(member, cloudDeployment);
+            
+            
             cout << "Profile Evaluation Match: " << score << "%" << endl;
+        
+            reportFile << "Candidate ID: " << member->getId() << "\n";
+            reportFile << "Profile Evaluation Match: " << score << "%\n";
+            reportFile << "----------------------------------------\n";
         }
+
+        reportFile.close();
+        cout << "\n[Success] Report successfully exported to match_report.txt!" << endl;
+
     } 
     catch (const std::invalid_argument& e) {
-        // If an invalid_argument happens, this code runs instead of crashing!
         cerr << "Configuration Error: " << e.what() << endl;
         return 1; 
     }
     catch (const std::exception& e) {
-        // Catch-all for any other unexpected standard exception
         cerr << "An unexpected error occurred: " << e.what() << endl;
         return 1;
     }
