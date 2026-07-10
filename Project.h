@@ -3,20 +3,31 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept> // Required for std::invalid_argument
 #include "ProjectCategory.h"
 
 class Project {
 private:
-    std::string projectId;
+    std::string id;
     ProjectCategory category;
-    std::vector<std::string> requiredTech;
+    std::vector<std::string> requiredSkills;
 
 public:
-    Project(std::string id, ProjectCategory cat, std::vector<std::string> tech)
-        : projectId(id), category(cat), requiredTech(tech) {}
+    // Inline constructor with safety check
+    Project(std::string id, ProjectCategory category, std::vector<std::string> reqSkills)
+        : category(category), requiredSkills(reqSkills) {
+        
+        // Safety guard: Don't allow empty project IDs
+        if (id.empty()) {
+            throw std::invalid_argument("Project ID cannot be empty");
+        }
+        
+        this->id = id;
+    }
 
+    std::string getId() const { return id; }
     ProjectCategory getCategory() const { return category; }
-    const std::vector<std::string>& getRequiredTech() const { return requiredTech; }
+    const std::vector<std::string>& getRequiredSkills() const { return requiredSkills; }
 };
 
 #endif
